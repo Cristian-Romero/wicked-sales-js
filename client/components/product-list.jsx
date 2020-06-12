@@ -19,6 +19,10 @@ class ProductList extends React.Component {
       });
   }
 
+  componentDidMount() {
+    this.getProducts();
+  }
+
   render() {
     return (
       <div className="container">
