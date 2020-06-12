@@ -8,6 +8,26 @@ class ProductList extends React.Component {
     };
   }
 
+  getProducts() {
+    fetch('/api/products')
+      .then(results => results.json)
+      .then(data => this.setState({
+        products: data
+      }))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  render() {
+    return (
+      <div className="container">
+        <div className="row row-cols-1 row-cols-md-3 product-container">
+
+        </div>
+      </div>
+    );
+  }
 }
 
 export default ProductList;
