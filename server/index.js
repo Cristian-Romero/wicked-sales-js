@@ -27,15 +27,20 @@ app.get('/api/products', (req, res, next) => {
 });
 
 app.get('/api/products/:productId', (req, res, next) => {
-  const productId = parseInt(req.params.productId, 10);
+  const productId = parseInt(req.params.productId);
   const sql = `
     select *
       from "products"
-      where productId = $1;`;
+      where "productId" = $1;`;
   const values = [productId];
   db.query(sql, values)
-    .then(result => res.json(result.rows))
-    .catch();
+    .then(result => {
+      if (!result.rows[0]) {
+        next(new ClientError(`Cannot find product with productId ${productId}`, 404));
+      }
+      res.json(result.rows[0]);
+    })
+    .catch(err => next(err));
 });
 
 app.use('/api', (req, res, next) => {
