@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductListItem from './product-list-item';
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -11,8 +12,8 @@ class ProductList extends React.Component {
   getProducts() {
     fetch('/api/products')
       .then(results => results.json)
-      .then(data => this.setState({
-        products: data
+      .then(items => this.setState({
+        products: items
       }))
       .catch(err => {
         console.error(err);
@@ -25,9 +26,12 @@ class ProductList extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row row-cols-1 row-cols-md-3 product-container">
-
+      <div className="container mt-5">
+        <div className="row row-cols-3">{
+          this.state.products.map(item => {
+            return <ProductListItem forSale={ item } key={ item.productId } />;
+          })
+        }
         </div>
       </div>
     );
