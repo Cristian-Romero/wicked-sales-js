@@ -27,7 +27,15 @@ app.get('/api/products', (req, res, next) => {
 });
 
 app.get('/api/products/:productId', (req, res, next) => {
-
+  const productId = parseInt(req.params.productId, 10);
+  const sql = `
+    select *
+      from "products"
+      where productId = $1;`;
+  const values = [productId];
+  db.query(sql, values)
+    .then(result => res.json(result.rows))
+    .catch();
 });
 
 app.use('/api', (req, res, next) => {
