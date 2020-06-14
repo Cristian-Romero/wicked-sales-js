@@ -7,11 +7,12 @@ class ProductList extends React.Component {
     this.state = {
       products: []
     };
+    this.getProducts = this.getProducts.bind(this);
   }
 
   getProducts() {
     fetch('/api/products')
-      .then(results => results.json)
+      .then(results => results.json())
       .then(items => this.setState({
         products: items
       }))
@@ -26,12 +27,13 @@ class ProductList extends React.Component {
 
   render() {
     return (
-      <div className="container mt-5">
-        <div className="row row-cols-3">{
-          this.state.products.map(item => {
-            return <ProductListItem forSale={ item } key={ item.productId } />;
-          })
-        }
+      <div className="container my-5 mx-auto">
+        <div className="row row-cols-3">
+          {
+            this.state.products.map(product => {
+              return <ProductListItem key={product.productId} product={product}/>;
+            })
+          }
         </div>
       </div>
     );

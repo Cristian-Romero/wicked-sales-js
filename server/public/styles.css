@@ -1,5 +1,7 @@
-.ws-header {
-  background-color: #343A40;
-  color: white;
-  height: 50px;
+.fit-picture {
+  object-fit: contain;
+}
+
+.img-dimen {
+  height: 290px;
 }
