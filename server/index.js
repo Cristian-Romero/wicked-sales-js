@@ -15,15 +15,19 @@ app.use(express.json());
 
 app.get('/api/products', (req, res, next) => {
   const sql = `
-  select "productId",
-    "name",
-    "price",
-    "image",
-    "shortDescription"
-    from "products";`;
+    select "productId",
+      "name",
+      "price",
+      "image",
+      "shortDescription"
+      from "products";`;
   db.query(sql)
     .then(result => res.json(result.rows))
     .catch(err => next(err));
+});
+
+app.get('/api/products/:productId', (req, res, next) => {
+
 });
 
 app.use('/api', (req, res, next) => {
