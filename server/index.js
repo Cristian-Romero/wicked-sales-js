@@ -15,14 +15,32 @@ app.use(express.json());
 
 app.get('/api/products', (req, res, next) => {
   const sql = `
-  select "productId",
-    "name",
-    "price",
-    "image",
-    "shortDescription"
-    from "products";`;
+    select "productId",
+      "name",
+      "price",
+      "image",
+      "shortDescription"
+      from "products";`;
   db.query(sql)
     .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.get('/api/products/:productId', (req, res, next) => {
+  const productId = parseInt(req.params.productId);
+  const sql = `
+    select *
+      from "products"
+      where "productId" = $1;`;
+  const values = [productId];
+  db.query(sql, values)
+    .then(result => {
+      if (!result.rows[0]) {
+        next(new ClientError(`Cannot find product with productId ${productId}`, 404));
+      } else {
+        res.json(result.rows[0]);
+      }
+    })
     .catch(err => next(err));
 });
 
