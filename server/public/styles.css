@@ -1,0 +1,7 @@
+.fit-picture {
+  object-fit: contain;
+}
+
+.img-dimen {
+  height: 290px;
+}
