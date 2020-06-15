@@ -63,7 +63,8 @@ app.post('/api/cart', (req, res, next) => {
   }
 
   const sql = `
-    select "price"
+    select "price",
+      "productId"
       from "products"
       where "productId" = $1;`;
   const values = [productId];
@@ -81,7 +82,8 @@ app.post('/api/cart', (req, res, next) => {
           .then(newRes => {
             return {
               cartId: newRes.rows[0].cartId,
-              price: result.rows[0].price
+              price: result.rows[0].price,
+              productId: result.rows[0].productId
             };
           });
       }
@@ -96,8 +98,24 @@ app.post('/api/cart', (req, res, next) => {
       return db.query(sql, values)
         .then(newRes => {
           return {
-            cartItemId: result.rows[0].cartItemId
+            cartItemId: newRes.rows[0].cartItemId
           };
+        });
+    })
+    .then(result => {
+      const sql = `
+      select "c"."cartItemId",
+            "c"."price",
+            "p"."productId",
+            "p"."image",
+            "p"."name",
+            "p"."shortDescription"
+      from "cartItems" as "c"
+      join "products" as "p" using ("productId")
+      where "c"."cartItemId" = $1`;
+      db.query(sql, [result.cartItemId])
+        .then(newRes => {
+          res.status(201).json(newRes.rows[0]);
         });
     });
 });
