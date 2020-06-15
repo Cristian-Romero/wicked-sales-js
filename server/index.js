@@ -57,15 +57,34 @@ app.post('/api/cart', (req, res, next) => {
   const productId = parseInt(req.params.productId);
   if (!Number.isInteger(productId) || productId <= 0) {
     res.status(400).json({
-      error: `ProductId must a positive integer, ${productId} is not.`
+      error: 'ProductId must a positive integer.'
     });
   }
+
   const sql = `
     select "price"
       from "products"
       where "productId" = $1;`;
   const values = [productId];
-  db.query(sql, values);
+
+  db.query(sql, values)
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError(`Cannot find product with "productId" of ${productId}`, 400);
+      } else {
+        const sql = `
+          insert into "carts" ("cartId", "createdAt")
+            values (default, default)
+            returning "cartId"`;
+        return db.query(sql)
+          .then(newRes => {
+            return {
+              cartId: newRes.rows[0].cartId,
+              price: result.rows[0].price
+            };
+          });
+      }
+    });
 });
 
 app.use('/api', (req, res, next) => {
