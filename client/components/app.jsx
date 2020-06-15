@@ -11,13 +11,14 @@ class App extends React.Component {
         params: {}
       }
     };
+    this.setView = this.setView.bind(this);
   }
 
   setView(name, params) {
     this.setState({
       view: {
-        name: name,
-        params: params
+        name,
+        params
       }
     });
   }
@@ -26,7 +27,7 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-        <ProductList />
+        <ProductList setView={this.setView}/>
       </div>
     );
   }
