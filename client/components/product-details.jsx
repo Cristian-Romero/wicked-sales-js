@@ -9,7 +9,7 @@ class ProductDetails extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/products/${this.props.productId}`)
+    fetch(`/api/products/${this.props.viewParams.productId}`)
       .then(response => response.json())
       .then(data => {
         this.setState({
@@ -22,7 +22,7 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    return !this.state.product
+    return this.state.product
       ? (
         <div className="container">
           <div className="card col-12">
@@ -35,7 +35,9 @@ class ProductDetails extends React.Component {
               </div>
               <div className="col">
                 <h2 className="card-title">{ this.state.product.name }</h2>
-                <p className="card-text text-muted">{ this.state.product.price }</p>
+                <p className="card-text text-muted">
+                  {`$${(this.state.product.price / 100).toFixed(2)}` }
+                </p>
                 <p className="card-text">{ this.state.product.shortDescription }</p>
               </div>
             </div>

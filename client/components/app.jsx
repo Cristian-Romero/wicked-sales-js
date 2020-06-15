@@ -26,7 +26,7 @@ class App extends React.Component {
 
   render() {
     const currentView = this.state.view.name === 'catalog'
-      ? <ProductList setView = { this.setView } />
+      ? <ProductList view={ this.setView } />
       : <ProductDetails viewParams={ this.state.view.params } setView={ this.setView } />;
     return (
       <div>
