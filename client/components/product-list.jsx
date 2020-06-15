@@ -27,8 +27,8 @@ class ProductList extends React.Component {
 
   render() {
     return (
-      <div className="container my-5 mx-auto">
-        <div className="row row-cols-3">
+      <div className="container">
+        <div className="row row-cols-3 my-5 mx-auto">
           {
             this.state.products.map(product => {
               return (

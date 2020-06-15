@@ -24,18 +24,18 @@ class ProductDetails extends React.Component {
   render() {
     return this.state.product
       ? (
-        <div className="container">
-          <div className="card col-12">
+        <div className="container my-5 mx-auto">
+          <div className="card">
             <div className="row text-muted card-body"
               onClick={() => this.props.setView('catalog', {})}
             >
               &lt; Back to catalog
             </div>
             <div className="row">
-              <div className="col">
-                <img src={ this.state.product.image } alt="" />
+              <div className="col-5">
+                <img src={this.state.product.image} className="col-12" alt="" />
               </div>
-              <div className="col">
+              <div className="col-7">
                 <h2 className="card-title">{ this.state.product.name }</h2>
                 <p className="card-text text-muted">
                   {`$${(this.state.product.price / 100).toFixed(2)}` }
