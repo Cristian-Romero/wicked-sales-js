@@ -54,8 +54,9 @@ app.get('/api/cart', (req, res, next) => {
 });
 
 app.post('/api/cart', (req, res, next) => {
-  const productId = parseInt(req.params.productId);
-  if (!Number.isInteger(productId) || productId <= 0) {
+  const { productId } = req.body;
+  const productIdInt = parseInt(productId);
+  if (!Number.isInteger(productIdInt) || productIdInt <= 0) {
     res.status(400).json({
       error: 'ProductId must a positive integer.'
     });
@@ -84,6 +85,20 @@ app.post('/api/cart', (req, res, next) => {
             };
           });
       }
+    })
+    .then(result => {
+      req.session.cartId = result.cartId;
+      const sql = `
+      insert into "cartItems" ("cartId", "productId", "price")
+        values ($1, $2, $3)
+      returning "cartItemId"`;
+      const values = [req.session.cartId, result.productId, result.price];
+      return db.query(sql, values)
+        .then(newRes => {
+          return {
+            cartItemId: result.rows[0].cartItemId
+          };
+        });
     });
 });
 
