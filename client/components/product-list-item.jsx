@@ -5,7 +5,7 @@ class ProductItemList extends React.Component {
     const { image, name, price, shortDescription } = this.props.product;
     return (
       <div className="col-4 mb-4">
-        <div className="card h-100"
+        <div className="card h-100 product-card"
           onClick={() => this.props.view('details', { productId: this.props.product.productId })}>
           <img src={ image } className="card-img-top fit-picture img-dimen" alt="..."/>
           <div className="card-body">

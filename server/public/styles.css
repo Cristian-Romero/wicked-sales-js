@@ -5,3 +5,8 @@
 .img-dimen {
   height: 290px;
 }
+
+.product-card:hover,
+.back-to-catalog:hover {
+  cursor: pointer;
+}
