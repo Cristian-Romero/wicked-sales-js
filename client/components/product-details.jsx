@@ -26,7 +26,9 @@ class ProductDetails extends React.Component {
       ? (
         <div className="container">
           <div className="card col-12">
-            <div className="row text-muted card-body">
+            <div className="row text-muted card-body"
+              onClick={() => this.props.setView('catalog', {})}
+            >
               &lt; Back to catalog
             </div>
             <div className="row">
