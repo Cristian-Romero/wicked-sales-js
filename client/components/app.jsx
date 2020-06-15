@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
+import ProductDetails from './product-details';
 
 class App extends React.Component {
   constructor(props) {
@@ -24,10 +25,13 @@ class App extends React.Component {
   }
 
   render() {
+    const currentView = this.state.view.name === 'catalog'
+      ? <ProductList setView = { this.setView } />
+      : <ProductDetails viewParams={ this.state.view.params } setView={ this.setView } />;
     return (
       <div>
         <Header />
-        <ProductList setView={this.setView}/>
+        { currentView }
       </div>
     );
   }
