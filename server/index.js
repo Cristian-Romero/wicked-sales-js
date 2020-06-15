@@ -46,11 +46,20 @@ app.get('/api/products/:productId', (req, res, next) => {
 
 app.get('/api/cart', (req, res, next) => {
   const sql = `
-  select *
-    from "carts";`;
+    select *
+      from "carts";`;
   db.query(sql)
     .then(result => res.json(result.rows))
     .catch(err => next(err));
+});
+
+app.post('/api/cart', (req, res, next) => {
+  const productId = parseInt(req.params.productId);
+  if (!Number.isInteger(productId) || productId <= 0) {
+    res.status(400).json({
+      error: `ProductId must a positive integer, ${productId} is not.`
+    });
+  }
 });
 
 app.use('/api', (req, res, next) => {
