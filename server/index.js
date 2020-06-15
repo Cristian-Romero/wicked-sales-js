@@ -60,6 +60,12 @@ app.post('/api/cart', (req, res, next) => {
       error: `ProductId must a positive integer, ${productId} is not.`
     });
   }
+  const sql = `
+    select "price"
+      from "products"
+      where "productId" = $1;`;
+  const values = [productId];
+  db.query(sql, values);
 });
 
 app.use('/api', (req, res, next) => {
