@@ -38,12 +38,15 @@ class App extends React.Component {
   addToCart(product) {
     const req = {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(product)
     };
     fetch('/api/cart', req)
       .then(result => result.json())
       .then(item => this.setState({
-        cart: this.state.concat(item)
+        cart: this.state.cart.concat([item])
       }));
   }
 
