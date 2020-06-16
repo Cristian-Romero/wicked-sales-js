@@ -42,7 +42,7 @@ class App extends React.Component {
     fetch('/api/cart', req)
       .then(result => result.json())
       .then(item => this.setState({
-        cart: item
+        cart: this.state.concat(item)
       }));
   }
 

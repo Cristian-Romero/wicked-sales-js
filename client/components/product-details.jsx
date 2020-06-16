@@ -41,6 +41,7 @@ class ProductDetails extends React.Component {
                   {`$${(this.state.product.price / 100).toFixed(2)}` }
                 </p>
                 <p className="card-text">{ this.state.product.shortDescription }</p>
+                <button type="button" className="btn btn-primary">Add to Cart</button>
               </div>
             </div>
             <div className="row card-text card-body">{this.state.product.longDescription }</div>
