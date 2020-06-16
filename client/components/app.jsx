@@ -44,7 +44,7 @@ class App extends React.Component {
       : <ProductDetails viewParams={ this.state.view.params } setView={ this.setView } />;
     return (
       <div>
-        <Header />
+        <Header itemCount={ this.state.cart.length }/>
         { currentView }
       </div>
     );
