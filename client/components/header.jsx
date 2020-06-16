@@ -5,11 +5,11 @@ class Header extends React.Component {
     return (
       <header className="navbar navbar-dark bg-dark">
         <div className="container d-flex justify-between-space align-items-baseline">
-          <a href="..." className="text-white">
+          <a href="" className="text-white text-decoration-none">
             <i className="fas fa-dollar-sign mr-1"></i>
           Wicked Sales
           </a>
-          <a href="" className="text-white">
+          <a href="" className="text-white text-decoration-none">
             { this.props.itemCount }
             <i className="fas fa-shopping-cart ml-1"></i>
           </a>
