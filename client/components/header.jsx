@@ -4,9 +4,15 @@ class Header extends React.Component {
   render() {
     return (
       <header className="navbar navbar-dark bg-dark">
-        <div className="container d-flex justify-content-start align-items-baseline">
-          <i className="fas fa-dollar-sign mr-1 text-white"></i>
-          <h6 className="mb-0 text-white">Wicked Sales</h6>
+        <div className="container d-flex justify-between-space align-items-baseline">
+          <a href="..." className="text-white">
+            <i className="fas fa-dollar-sign mr-1"></i>
+          Wicked Sales
+          </a>
+          <a href="" className="text-white">
+            { this.props.itemCount }
+            <i className="fas fa-shopping-cart ml-1"></i>
+          </a>
         </div>
       </header>
     );
