@@ -15,6 +15,7 @@ class App extends React.Component {
     };
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   setView(name, params) {
@@ -53,7 +54,10 @@ class App extends React.Component {
   render() {
     const currentView = this.state.view.name === 'catalog'
       ? <ProductList view={ this.setView } />
-      : <ProductDetails viewParams={ this.state.view.params } setView={ this.setView } />;
+      : <ProductDetails
+        viewParams={ this.state.view.params }
+        setView={ this.setView }
+        addToCart={ this.addToCart }/>;
     return (
       <div>
         <Header itemCount={ this.state.cart.length }/>
