@@ -34,6 +34,18 @@ class App extends React.Component {
       }));
   }
 
+  addToCart(product) {
+    const req = {
+      method: 'POST',
+      body: JSON.stringify(product)
+    };
+    fetch('/api/cart', req)
+      .then(result => result.json())
+      .then(item => this.setState({
+        cart: item
+      }));
+  }
+
   componentDidMount() {
     this.getCartItems();
   }
