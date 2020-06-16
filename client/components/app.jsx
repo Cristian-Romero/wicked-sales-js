@@ -25,6 +25,14 @@ class App extends React.Component {
     });
   }
 
+  getCartItems() {
+    fetch('/api/cart')
+      .then(response => response.json())
+      .then(items => this.setState({
+        cart: items
+      }));
+  }
+
   render() {
     const currentView = this.state.view.name === 'catalog'
       ? <ProductList view={ this.setView } />
