@@ -11,7 +11,9 @@ class Header extends React.Component {
           </a>
           <a href="" className="text-white text-decoration-none">
             { this.props.itemCount }
-            <i className="fas fa-shopping-cart ml-1"></i>
+            <i className="fas fa-shopping-cart ml-1"
+              onClick={this.props.setView({ name: 'cart', params: {} })}>
+            </i>
           </a>
         </div>
       </header>
