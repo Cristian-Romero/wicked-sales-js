@@ -67,14 +67,14 @@ class App extends React.Component {
           setView={this.setView}
           addToCart={this.addToCart} />;
         break;
-      case 'cart-summary':
+      case 'cart':
         currentView = <CartSummary items={this.state.cart} />;
         break;
       default: currentView = null;
     }
     return (
       <div>
-        <Header itemCount={ this.state.cart.length }/>
+        <Header itemCount={ this.state.cart.length } setView={this.setView}/>
         { currentView }
       </div>
     );
