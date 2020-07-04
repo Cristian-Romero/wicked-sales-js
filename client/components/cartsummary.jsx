@@ -25,7 +25,13 @@ class CartSummary extends React.Component {
             })}
           </div>
           <div>
-            Total Amount Goes here!
+            <h5>
+              { `Item Total $${(
+                this.props.items.reduce((acc, cur) => {
+                  return acc + cur.price;
+                }, 0) / 100).toFixed(2)}`
+              }
+            </h5>
           </div>
         </div>
       );
