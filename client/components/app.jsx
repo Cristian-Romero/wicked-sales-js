@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from './header';
-// import ProductList from './product-list';
-// import ProductDetails from './product-details';
-import CartSummaryItem from './cartsummaryitem';
+import ProductList from './product-list';
+import ProductDetails from './product-details';
+import CartSummary from './cartsummary';
 
 class App extends React.Component {
   constructor(props) {
@@ -56,17 +56,26 @@ class App extends React.Component {
   }
 
   render() {
-    // const currentView = this.state.view.name === 'catalog'
-    //   ? <ProductList view={ this.setView } />
-    //   : <ProductDetails
-    //     viewParams={ this.state.view.params }
-    //     setView={ this.setView }
-    //     addToCart={ this.addToCart }/>;
+    let currentView;
+    switch (this.state.view.name) {
+      case 'catalog':
+        currentView = <ProductList view={this.setView} />;
+        break;
+      case 'details':
+        currentView = <ProductDetails
+          viewParams={this.state.view.params}
+          setView={this.setView}
+          addToCart={this.addToCart} />;
+        break;
+      case 'cart-summary':
+        currentView = <CartSummary items={this.state.cart} />;
+        break;
+      default: currentView = null;
+    }
     return (
       <div>
         <Header itemCount={ this.state.cart.length }/>
-        <CartSummaryItem />
-        {/* { currentView } */}
+        { currentView }
       </div>
     );
   }
