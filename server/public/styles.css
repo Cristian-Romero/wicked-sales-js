@@ -7,6 +7,8 @@
 }
 
 .product-card:hover,
-.back-to-catalog:hover {
+.back-to-catalog:hover,
+.logo:hover,
+.cart:hover {
   cursor: pointer;
 }
