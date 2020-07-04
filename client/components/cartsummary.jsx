@@ -25,7 +25,13 @@ class CartSummary extends React.Component {
             })}
           </div>
           <div>
-
+            {
+              this.props.items.reduce((accumulator, currentValue) => {
+                currentValue.price = 0 + currentValue.productId;
+                const totalAmount = accumulator + currentValue.amount;
+                return `$${(totalAmount / 100).toFixed(2)}`;
+              })
+            }
           </div>
         </div>
       );
