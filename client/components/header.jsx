@@ -5,14 +5,15 @@ class Header extends React.Component {
     return (
       <header className="navbar navbar-dark bg-dark">
         <div className="container d-flex justify-between-space align-items-baseline">
-          <a href="" className="text-white text-decoration-none">
+          <div className="text-white text-decoration-none logo">
             <i className="fas fa-dollar-sign mr-1"></i>
           Wicked Sales
-          </a>
-          <a href="" className="text-white text-decoration-none">
+          </div>
+          <div className="text-white text-decoration-none cart"
+            onClick={() => this.props.setView('cart', {})}>
             { this.props.itemCount }
             <i className="fas fa-shopping-cart ml-1"></i>
-          </a>
+          </div>
         </div>
       </header>
     );
